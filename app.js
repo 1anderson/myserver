@@ -37,9 +37,9 @@ app.post('/post', function (req, res) {
   //   res.json({message:'Artigo Cadastrado Com Sucesso'});
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
-});
+// app.listen(3000, function () {
+//   console.log('Example app listening on port 3000!')
+// });
 
  
 function connectToDatabase(_host, _user, _password, _database, _query){
@@ -66,6 +66,8 @@ function connectToDatabase(_host, _user, _password, _database, _query){
 function requiringTheDatabase(_query, _inserts){
   return mysql.format(_query, _inserts);
 }
+
+module.exports = app;
 
 
 
