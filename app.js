@@ -4,11 +4,25 @@ const mysql = require('mysql')
 var json={title: 'title', text: 'text'};
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const Sequelize = require('sequelize');
+var sequelize = new Sequelize('test', 'anderson', 'pass', {
+  dialect: 'mysql'
+});
+
+
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
+  sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
