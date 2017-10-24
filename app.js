@@ -5,12 +5,13 @@ var json={title: 'title', text: 'text'};
 var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const Sequelize = require('sequelize');
+var user = require('./router/user.router')
 var sequelize = new Sequelize('test', 'anderson', 'pass', {
   dialect: 'mysql'
 });
 
 
-
+user.hello();
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
