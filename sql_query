@@ -1,0 +1,84 @@
+create table User(
+    user_id int not null AUTO_INCREMENT,
+    name varchar(30) not null,
+    login varchar(20) not null,
+    password varchar(20) not null,
+    role varchar(15) not null,
+    date_of_creation date not null,
+    primary key(user_id)
+)engine = innodb;
+
+create table Category(
+    category_id int not null AUTO_INCREMENT,
+    name varchar(20) not null,
+    primary key(category_id)
+)engine = innodb;
+
+create table Sub_category(
+    sub_category_id int not null AUTO_INCREMENT,
+    name varchar(20) not null,
+    category_fk int not null,
+    primary key(sub_category_id),
+    FOREIGN KEY (category_fk) REFERENCES Category (category_id) 
+)engine = innodb;
+
+create table Post(
+    post_id int not null AUTO_INCREMENT,
+    title varchar(20) not null,
+    description varchar(30) not null,
+    body text not null,
+    path_of_images varchar(20),
+    date_of_creation date not null,
+    primary key (post_id),
+    user_fk int not null,
+    category_fk int not null,
+    sub_category_fk int not null,
+    FOREIGN KEY (user_fk) REFERENCES User (user_id),
+    FOREIGN KEY (category_fk) REFERENCES Category (category_id),
+    FOREIGN KEY (sub_category_fk) REFERENCES Sub_category (sub_category_id)
+)engine = innodb;
+
+
+create table Comment (
+    comment_id int not null AUTO_INCREMENT,
+    text varchar(45),
+    date_of_comment date not null,
+    post_fk int not null,
+    primary key (comment_id),
+    FOREIGN KEY (post_fk) REFERENCES Post (post_id)
+)engine = innodb;
+
+create table Reply_comment(
+    reply_comment_id int not null AUTO_INCREMENT,
+    text varchar (45),
+    date_of_reply_comment date not null,
+    comment_fk int,
+    reply_comment_fk int,
+    user_fk int not null,
+    primary key (reply_comment_id),
+    FOREIGN KEY (comment_fk) REFERENCES Comment (comment_id),
+    FOREIGN KEY (reply_comment_fk) REFERENCES Reply_comment (reply_comment_id),
+    FOREIGN KEY (user_fk) REFERENCES User (user_id)
+)engine = innodb;
+
+create table Like_comment(
+    like_comment_id int not null AUTO_INCREMENT,
+    like_comment bool not null,
+    created_date date not null,
+    primary key (like_comment_id),
+    comment_fk int not null,
+    user_fk int not null,
+    FOREIGN KEY (comment_fk) REFERENCES Comment (comment_id),
+    FOREIGN KEY (user_fk) REFERENCES User (user_id)
+)engine = innodb;
+
+create table Like_reply_comment(
+    like_reply_comment_id int not null AUTO_INCREMENT,
+    like_reply_comment bool not null,
+    created_date date not null,
+    primary key (like_reply_comment_id),
+    reply_comment_fk int not null,
+    user_fk int not null,
+    FOREIGN KEY (reply_comment_fk) REFERENCES Reply_comment (reply_comment_id),
+    FOREIGN KEY (user_fk) REFERENCES User (user_id)
+)engine = innodb;

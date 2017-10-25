@@ -1,6 +1,0 @@
-
-create database blog_db;
-use blog_db;
-create table articles (id int not null auto_increment primary key, title varchar(255),descripition varchar(255), body text);
-
-
