@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var app = require('../app');
+import { app } from '../app';
 var debug = require('debug')('express-test:server');
-var http = require('http');
+import * as http from 'http';
 var models = require('../models');
-
+console.log(http);
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
