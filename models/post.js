@@ -15,7 +15,7 @@ module.exports = function( sequelize, DataTypes ){
         });
 
         post.associate = (models) => {
-            post.belongsTo(models.User, {foreignKey: 'user_fk', targetKey: 'user_id'});
+            post.belongsTo(models.User_Account, {foreignKey: 'user_account_fk', targetKey: 'user_account_id'});
             post.belongsTo(models.Category, {foreignKey: 'category_fk', targetKey: 'category_id'}); 
             post.belongsTo(models.Sub_category, {foreignKey: 'sub_category_fk', targetKey: 'sub_category_id'});  
         }

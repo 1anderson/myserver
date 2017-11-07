@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes){
 
     likeComment.associate = function(models){
         likeComment.belongsTo(models.Comment, {foreignKey: 'comment_fk', unique: true, targetKey: 'comment_id'});
-        likeComment.belongsTo(models.User, {foreignKey: 'user_fk', unique: true, targetKey: 'user_id'});
+        likeComment.belongsTo(models.User_Account, {foreignKey: 'user_account_fk', unique: true, targetKey: 'user_account_id'});
     };
 
     return likeComment;
