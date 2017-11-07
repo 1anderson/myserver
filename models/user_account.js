@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var UserAccount = sequelize.define("User_Account", {
-    user_account_id: { type: DataTypes.INTEGER, primaryKey: true , autoIncrement: true },
+  var UserAccount = sequelize.define("User_account", {
+    user_account_id: { type: DataTypes.INTEGER, primaryKey: true},
     user_name: { type: DataTypes.STRING(30), allowNull: false},
     password:{ type: DataTypes.STRING(200), allowNull: false},
     password_salt:{ type: DataTypes.STRING(50), allowNull: false},
@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   UserAccount.associate = function(models){
-    UserAccount.belongsTo(models.User_Account_status, {foreignKey: 'User_Account_status_fk', unique: true, targetKey: 'User_Account_status_id'});
+    UserAccount.belongsTo(models.User_account_status, {foreignKey: 'User_account_status_fk', unique: true, targetKey: 'User_account_status_id'});
+    UserAccount.belongsTo(models.User_profile, {foreignKey: 'user_account_id', targetKey: 'user_profile_id'});
     
   }
   return UserAccount;
