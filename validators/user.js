@@ -4,14 +4,20 @@
 
     
 
-    function loginValidator(){
+    function loginValidator(req){
         console.log('validator login');
     };
 
+    function creationValidation(req){
+        
+       
+    }
 
 
-    export default {
-        loginValidator: loginValidator
+
+    export {
+        loginValidator,
+        creationValidation
     };
 
 
