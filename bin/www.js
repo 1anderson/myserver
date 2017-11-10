@@ -4,7 +4,6 @@ import { app } from '../app';
 var debug = require('debug')('express-test:server');
 import * as http from 'http';
 var models = require('../models');
-console.log(http);
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

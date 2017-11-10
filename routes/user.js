@@ -1,11 +1,9 @@
 import Router from 'express';
 const userRouter = Router();
-import userValidator from '../validators/user';
+import * as userValidator from '../validators/user';
+import * as userController from '../controllers/user';
 export default (models) => {
-    userRouter.get('', function (req, res) {
-        userValidator.loginValidator();
-        // models.User.findAll().then((users) => console.log(users));
-    })
+    userRouter.post('',userValidator.validatingForCreation,userController.createUser(models.User_profile));
     
     return userRouter;
 };
