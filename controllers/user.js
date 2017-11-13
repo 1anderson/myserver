@@ -3,15 +3,10 @@ import * as passwordService from '../services/password';
 
 function createUser(models){
     return (req, res, next) =>{
-        createUserProfile(models, req.body).then((user)=>{
-            return createAccount(models, req.body,user.user_profile_id);
-        },(error)=>{
-            res.status(500).json({msg: error});
-        }).then((userAccount)=>{
-            res.status(201).json({msg: `user user created successfully`});
-        },(error)=>{
-           res.status(500).json({msg: error});
-        });
+        createUserProfile(models, req.body).then((user)=> 
+            createAccount(models, req.body,user.user_profile_id))
+         .then((userAccount)=>
+            res.status(201).json({msg: `user created successfully`}));
     };
 };
 
@@ -24,7 +19,6 @@ function createUserProfile(models, userProfileData){
         }).then((user)=>{
             resolve(user);
         },(error)=>{
-            console.log(error);
             reject(error);
         });
     });
@@ -53,7 +47,7 @@ function createAccount(models, userAccountData, profileId){
 
             });
         });
-}
+};
 
 export {
     createUser,
