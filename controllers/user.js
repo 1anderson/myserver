@@ -1,29 +1,60 @@
 'use strict'
-var bcrypt = require('bcryptjs');
+import * as passwordService from '../services/password'; 
+
 function createUser(models){
     return (req, res, next) =>{
-
-        models.User_profile.create({
-            name: req.body.name,
-            last_name: req.body.last_name,
-            email: req.body.email
-        }).then((user)=>{
-            res.status(201).json({msg:`user ${user.name} created successfully`});
+        createUserProfile(models, req.body).then((user)=>{
+            return createAccount(models, req.body,user.user_profile_id);
         },(error)=>{
-            res.status(500).json({msg:' Internal Server Error”'});
+            res.status(500).json({msg: error});
+        }).then((userAccount)=>{
+            res.status(201).json({msg: `user user created successfully`});
+        },(error)=>{
+           res.status(500).json({msg: error});
         });
-        
     };
 };
 
-function createAccount(models,userProfileId){
-        if(!userProfileId){
-            models.User_account.create({
+function createUserProfile(models, userProfileData){
+    return new Promise((resolve, reject)=>{
+        models.User_profile.create({
+            name: userProfileData.name,
+            last_name: userProfileData.last_name,
+            email: userProfileData.email
+        }).then((user)=>{
+            resolve(user);
+        },(error)=>{
+            console.log(error);
+            reject(error);
+        });
+    });
+};
+
+function createAccount(models, userAccountData, profileId){
+        return new Promise((resolve, reject)=>{
+            passwordService.generatePasswordHash(userAccountData.password).then((hash)=>{
+                models.User_account.create({
+                    user_account_id: profileId,
+                    password: hash,
+                    role: userAccountData.role,
+                    date_of_creation : new Date(),
+                    email: userAccountData.email,
+                    //registration_time,
+                    //email_confirmation_token,
+                    password_reminder_token: null,
+                    password_reminder_expire: null,
+                    user_account_status_fk: 1
+                   }).then((userAccount)=>{
+                   resolve(userAccount);
+                },(error)=>{
+                    console.log(error);
+                    reject(error);
+                });
 
             });
-        }
+        });
 }
 
 export {
-    createUser
+    createUser,
 }
