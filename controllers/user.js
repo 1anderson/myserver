@@ -49,6 +49,25 @@ function createAccount(models, userAccountData, profileId){
         });
 };
 
+
+function login(models){
+    return (req, res, next) =>{
+        models.User_account.findOne({
+            where: {email: req.body.email},
+            attributes: ['password']
+          })
+            .then(user => passwordService.comparingPasswordHash(req.body.password,user.password))
+            .then(()=>{
+                res.status(201).json({msg:'valid user'});
+            }),()=>{
+                res.status(404).json({msg:'user invalid'});
+            }
+    };
+};
+    
+
+
 export {
     createUser,
+    login
 }

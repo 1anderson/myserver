@@ -11,15 +11,16 @@
         req.validationErrors()===false? next():res.send(req.validationErrors());
     };
 
-    function creationValidation(req){
-        
-       
+    function loginValidation(req, res, next){
+        req.checkBody('email','email is required').exists();
+        req.checkBody('password','password is required').exists();
+        req.validationErrors()===false? next():res.send(req.validationErrors());
     };
 
 
 
     export {
-        loginValidator,
+        loginValidation,
         validatingForCreation
     };
 
