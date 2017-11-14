@@ -56,12 +56,12 @@ function login(models){
             where: {email: req.body.email},
             attributes: ['password']
           })
-            .then(user => passwordService.comparingPasswordHash(req.body.password,user.password))
-            .then(()=>{
-                res.status(201).json({msg:'valid user'});
-            }),()=>{
-                res.status(404).json({msg:'user invalid'});
-            }
+            .then(user => {
+                user?passwordService.comparingPasswordHash(req.body.password,user.password):res.status(401).json({msg:'user invalid'});
+            })
+            .then((resp)=>{
+                resp===true?res.status(201).json({msg:'valid user'}):res.status(401).json({msg:'user invalid'});
+            }).catch((err)=>console.log(err));
     };
 };
     

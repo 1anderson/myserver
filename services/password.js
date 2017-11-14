@@ -13,12 +13,7 @@ function generatePasswordHash(password){
 }
 
 function comparingPasswordHash(hashOne, hashTwo){
-    return new Promise((resolve, reject)=>{
-        bcrypt.compare(hashOne, hashTwo).then((res) => {
-            res===true?resolve(res):reject(res);
-        });
-    })
-  
+    return bcrypt.compare(hashOne, hashTwo);
 }
 
 
