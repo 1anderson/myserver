@@ -1,12 +1,15 @@
 'use strict'
-import * as passwordService from '../services/password'; 
+import * as passwordService from '../services/password';
+import * as emailService from '../services/email'; 
 
 function createUser(models){
     return (req, res, next) =>{
         createUserProfile(models, req.body).then((user)=> 
             createAccount(models, req.body,user.user_profile_id))
-         .then((userAccount)=>
-            res.status(201).json({msg: `user created successfully`}));
+         .then((userAccount)=>{
+            res.status(201).json({msg: `user created successfully`})
+            
+        });
     };
 };
 
