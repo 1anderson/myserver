@@ -29,8 +29,9 @@ function createUserProfile(models, userProfileData){
 
 function createAccount(models, userAccountData, profileId){
         return new Promise((resolve, reject)=>{
-            Promise.all([passwordService.generatePasswordHash(userAccountData.password),passwordService.generatingHash('anderson')])
+            Promise.all([passwordService.generatedHash(userAccountData.password,10),passwordService.generatedHash('anderson',1)])
              .then((values)=>{
+                 console.log(values);
                 models.User_account.create({
                     user_account_id: profileId,
                     password: values[0],
@@ -61,6 +62,7 @@ function login(models){
             attributes: ['password']
           })
             .then(user => {
+                console.log(req.body.password);
                 user?passwordService.comparingPasswordHash(req.body.password,user.password):res.status(401).json({msg:'user invalid'});
             })
             .then((resp)=>{

@@ -2,9 +2,9 @@
 
 var bcrypt = require('bcryptjs');
 
-function generatePasswordHash(password){
+function generatedHash(password,salt){
     return new Promise((resolve, reject)=>{
-        bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.genSalt(salt, function(err, salt) {
             bcrypt.hash(password, salt, function(err, hash) {
                 resolve(hash); 
             });
@@ -16,18 +16,16 @@ function comparingPasswordHash(hashOne, hashTwo){
     return bcrypt.compare(hashOne, hashTwo);
 }
 
-function generatingHash(string){
-    return new Promise((resolve, reject)=>{
-        bcrypt.genSalt(1, function(err, salt) {
-            bcrypt.hash(string, salt, function(err, hash) {
-                resolve(hash); 
-            });
-        });
+function hashPasswordOnRequisition(req, res, next){
+    generatedHash(req.body.password,10).then((hash)=>{
+        req.body.password = hash;
+        next();
     });
-}
+};
 
 export {
-    generatePasswordHash,
     comparingPasswordHash,
-    generatingHash
+    generatedHash,
+    hashPasswordOnRequisition
 }
+
