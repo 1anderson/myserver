@@ -29,15 +29,16 @@ function createUserProfile(models, userProfileData){
 
 function createAccount(models, userAccountData, profileId){
         return new Promise((resolve, reject)=>{
-            passwordService.generatePasswordHash(userAccountData.password).then((hash)=>{
+            Promise.all([passwordService.generatePasswordHash(userAccountData.password),passwordService.generatingHash('anderson')])
+             .then((values)=>{
                 models.User_account.create({
                     user_account_id: profileId,
-                    password: hash,
+                    password: values[0],
                     role: userAccountData.role,
                     date_of_creation : new Date(),
                     email: userAccountData.email,
                     //registration_time,
-                    //email_confirmation_token,
+                    email_confirmation_token: values[1],
                     password_reminder_token: null,
                     password_reminder_expire: null,
                     user_account_status_fk: 1
