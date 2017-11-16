@@ -5,11 +5,10 @@ import * as emailService from '../services/email';
 function createUser(models){
     return (req, res, next) =>{
         createUserProfile(models, req.body).then((user)=> 
-            createAccount(models, req.body,user.user_profile_id))
+            createAccount(models, req.body, user.user_profile_id))
          .then((userAccount)=>{
             res.status(201).json({msg: `user created successfully`})
-            
-        });
+         });
     };
 };
 
@@ -29,7 +28,8 @@ function createUserProfile(models, userProfileData){
 
 function createAccount(models, userAccountData, profileId){
         return new Promise((resolve, reject)=>{
-            Promise.all([passwordService.generatedHash(userAccountData.password,10),passwordService.generatedHash('anderson',1)])
+            Promise.all([passwordService.generatedHash(userAccountData.password,10),
+                    passwordService.generatedHash(userAccountData.name+userAccountData.last_name+userAccountData.email,1)])
              .then((values)=>{
                  console.log(values);
                 models.User_account.create({
@@ -38,7 +38,7 @@ function createAccount(models, userAccountData, profileId){
                     role: userAccountData.role,
                     date_of_creation : new Date(),
                     email: userAccountData.email,
-                    //registration_time,
+                    registration_time: new Date(), 
                     email_confirmation_token: values[1],
                     password_reminder_token: null,
                     password_reminder_expire: null,
@@ -62,16 +62,18 @@ function login(models){
             attributes: ['password']
           })
             .then(user => {
-                console.log(req.body.password);
-                user?passwordService.comparingPasswordHash(req.body.password,user.password):res.status(401).json({msg:'user invalid'});
-            })
-            .then((resp)=>{
-                resp===true?res.status(201).json({msg:'valid user'}):res.status(401).json({msg:'user invalid'});
-            }).catch((err)=>console.log(err));
+                if(user){
+                    passwordService.comparingPasswordHash(req.body.password,user.password)
+                    .then((resp)=>{
+                        resp===true?res.status(201).json({msg:'valid user'}):res.status(401).json({msg:'user invalid'});
+                    }).catch((err)=>console.log(err));
+                }else{
+                    res.status(401).json({msg:'user not exist'});
+                }
+            });
+           
     };
 };
-    
-
 
 export {
     createUser,
