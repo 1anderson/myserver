@@ -1,6 +1,7 @@
 'use strict'
 import * as passwordService from '../services/password';
 import * as emailService from '../services/email'; 
+import {accountStatus} from '../services/information';
 
 function createUser(models){
     return (req, res, next) =>{
@@ -42,7 +43,7 @@ function createAccount(models, userAccountData, profileId){
                     email_confirmation_token: values[1],
                     password_reminder_token: null,
                     password_reminder_expire: null,
-                    user_account_status_fk: 1
+                    user_account_status_fk: accountStatus.PENDING
                    }).then((userAccount)=>{
                    resolve(userAccount);
                 },(error)=>{
