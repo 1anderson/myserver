@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const validator = require('express-validator');
+var jwt = require('jsonwebtoken');
+
 import userRouter from './routes/user';
 const models  = require('./models');
 import * as information from './services/information';

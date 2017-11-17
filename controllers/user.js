@@ -1,4 +1,5 @@
 'use strict'
+var jwt = require('jsonwebtoken');
 import * as passwordService from '../services/password';
 import * as emailService from '../services/email'; 
 import {accountStatus} from '../services/information';
@@ -29,24 +30,25 @@ function createUserProfile(models, userProfileData){
 
 function createAccount(models, userAccountData, profileId){
         return new Promise((resolve, reject)=>{
-            Promise.all([passwordService.generatedHash(userAccountData.password,10),
-                    passwordService.generatedHash(userAccountData.name+userAccountData.last_name+userAccountData.email,1)])
-             .then((values)=>{
-                 var dateRegistration = new Date();
-                models.User_account.create({
-                    user_account_id: profileId,
-                    password: values[0],
-                    role: userAccountData.role,
-                    date_of_creation : new Date(),
-                    email: userAccountData.email,
-                    registration_time: dateRegistration.setDate(dateRegistration.getDate()+1), 
-                    email_confirmation_token: values[1],
-                    password_reminder_token: null,
-                    password_reminder_expire: null,
-                    user_account_status_fk: accountStatus.PENDING
+            passwordService.generatedHash(userAccountData.password,10)
+                .then((passwordHash)=>{
+                  models.User_account.create({
+                        user_account_id: profileId,
+                        password: passwordHash,
+                        role: userAccountData.role,
+                        date_of_creation : new Date(),
+                        email: userAccountData.email,
+                        active_account: false,
+                        password_reminder_token: null,
+                        password_reminder_expire: null,
+                        user_account_status_fk: accountStatus.PENDING
                    }).then((userAccount)=>{
-                        emailService.sendAuthorizationEmail(values[1]);
-                   resolve(userAccount);
+                    jwt.sign({
+                        data: userAccount.user_account_id
+                      }, 'secret123', { expiresIn: '1h' },(err, token)=>{
+                        emailService.sendAuthorizationEmail(token);
+                    });
+                    resolve(userAccount);
                 },(error)=>{
                     console.log(error);
                     reject(error);
@@ -79,13 +81,16 @@ function login(models){
 
 function registrationConfirmation(models){
         return (req, res, next)=>{
-            models.User_account.findOne({ where: {email_confirmation_token: req.params.email_confirmation_token} })
-                .then(user_account => {
-                    console.log(user_account);
-                });
-            console.log(req.params);
+            jwt.verify( req.params.email_confirmation_token, 'secret123', function(err, decoded) {
+                if(decoded){
+                    models.User_account.findById(decoded.data)
+                        .then(user_account => {
+                            console.log(user_account);
+                        });
+                }
+              });
+            
         }
-    
 }
 
 export {

@@ -22,7 +22,7 @@ function sendAuthorizationEmail(email_confirmation_token){
                 to: 'anderson.allan.sobral@gmail.com', // list of receivers
                 subject: 'Confirmation Register ✔', // Subject line
                 //text: email_confirmation_token, // plain text body
-                //html: '<b>Hello world?</b>' // html body
+                html: `Click no link para ativar a sua conta: <a>http://localhost:3000/registration-confirmation/${email_confirmation_token}</a>` // html body
             };
         
             // send mail with defined transport object
