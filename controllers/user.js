@@ -79,12 +79,17 @@ function login(models){
 
 function registrationConfirmation(models){
         return (req, res, next)=>{
-            
+            models.User_account.findOne({ where: {email_confirmation_token: req.params.email_confirmation_token} })
+                .then(user_account => {
+                    console.log(user_account);
+                });
+            console.log(req.params);
         }
     
 }
 
 export {
     createUser,
-    login
+    login,
+    registrationConfirmation
 }
