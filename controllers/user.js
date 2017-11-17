@@ -32,19 +32,20 @@ function createAccount(models, userAccountData, profileId){
             Promise.all([passwordService.generatedHash(userAccountData.password,10),
                     passwordService.generatedHash(userAccountData.name+userAccountData.last_name+userAccountData.email,1)])
              .then((values)=>{
-                 console.log(values);
+                 var dateRegistration = new Date();
                 models.User_account.create({
                     user_account_id: profileId,
                     password: values[0],
                     role: userAccountData.role,
                     date_of_creation : new Date(),
                     email: userAccountData.email,
-                    registration_time: new Date(), 
+                    registration_time: dateRegistration.setDate(dateRegistration.getDate()+1), 
                     email_confirmation_token: values[1],
                     password_reminder_token: null,
                     password_reminder_expire: null,
                     user_account_status_fk: accountStatus.PENDING
                    }).then((userAccount)=>{
+                        emailService.sendAuthorizationEmail(values[1]);
                    resolve(userAccount);
                 },(error)=>{
                     console.log(error);
@@ -75,6 +76,13 @@ function login(models){
            
     };
 };
+
+function registrationConfirmation(models){
+        return (req, res, next)=>{
+            
+        }
+    
+}
 
 export {
     createUser,
