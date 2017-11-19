@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 // Generate test SMTP service account from ethereal.email
 // Only needed if you don't have a real mail account for testing
 
-function sendAuthorizationEmail(email_confirmation_token){
+function sendAuthorizationEmail(email_confirmation_token,email){
     nodemailer.createTestAccount((err, account) => {
         
             // create reusable transporter object using the default SMTP transport
@@ -19,10 +19,10 @@ function sendAuthorizationEmail(email_confirmation_token){
             // setup email data with unicode symbols
             let mailOptions = {
                 from: 'allangremista@hotmail.com', // sender address
-                to: 'anderson.allan.sobral@gmail.com', // list of receivers
+                to: email, // list of receivers
                 subject: 'Confirmation Register ✔', // Subject line
                 //text: email_confirmation_token, // plain text body
-                html: `Click no link para ativar a sua conta: <a>http://localhost:3000/registration-confirmation/${email_confirmation_token}</a>` // html body
+                html: `<p>Click  para ativar a sua conta: http://localhost:3000/user/registration-confirmation/${email_confirmation_token}</p>` // html body
             };
         
             // send mail with defined transport object

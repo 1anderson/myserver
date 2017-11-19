@@ -46,7 +46,7 @@ function createAccount(models, userAccountData, profileId){
                     jwt.sign({
                         data: userAccount.user_account_id
                       }, 'secret123', { expiresIn: '1h' },(err, token)=>{
-                        emailService.sendAuthorizationEmail(token);
+                        emailService.sendAuthorizationEmail(token,userAccount.email);
                     });
                     resolve(userAccount);
                 },(error)=>{
@@ -63,16 +63,18 @@ function login(models){
     return (req, res, next) =>{
         models.User_account.findOne({
             where: {email: req.body.email},
-            attributes: ['password']
+            attributes: ['password','active_account']
           })
             .then(user => {
-                if(user){
+               if(!user){
+                    res.status(401).json({msg:'user not exist'});
+                } else if(user.dataValues.active_account){
                     passwordService.comparingPasswordHash(req.body.password,user.password)
                     .then((resp)=>{
                         resp===true?res.status(201).json({msg:'valid user'}):res.status(401).json({msg:'user invalid'});
                     }).catch((err)=>console.log(err));
                 }else{
-                    res.status(401).json({msg:'user not exist'});
+                    res.status(401).json({msg:'check your email to finalize your registration'});
                 }
             });
            
@@ -85,13 +87,18 @@ function registrationConfirmation(models){
                 if(decoded){
                     models.User_account.findById(decoded.data)
                         .then(user_account => {
-                            console.log(user_account);
+                            user_account.update({
+                                active_account:true,     
+                            }).then((row)=>{
+                                res.status(200).json({msg: 'account active!'});
+                            });
                         });
-                }
+                }else{
+                    res.status(401).json({msg: err});
+                };
               });
-            
-        }
-}
+        };
+};
 
 export {
     createUser,
