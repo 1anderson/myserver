@@ -22,13 +22,6 @@ function loadAccountStatus(models){
 
 
 
-
-
-// user_account_status_id | code | name    |
-// +------------------------+------+---------+
-// |                      1 | 200  | ACTIVE  |
-// |                      2 | 401  | PENDING 
-
 export {
     loadAccountStatus,
     accountStatus
