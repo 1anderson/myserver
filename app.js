@@ -6,6 +6,7 @@ const validator = require('express-validator');
 var jwt = require('jsonwebtoken');
 
 import userRouter from './routes/user';
+import categoryRouter from './routes/category';
 const models  = require('./models');
 import * as information from './services/information';
 information.loadAccountStatus(models);
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 app.use(validator());
 app.use('/user', userRouter(models));
+app.use('/category', categoryRouter(models));
 export { app };
 
 
