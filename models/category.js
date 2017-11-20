@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes){
     var category = sequelize.define("Category", {
         category_id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
-        category_name: {type:DataTypes.STRING(20), allowNull: false, unique:{msg: "Category name exists"}}
+        category_name: {type:DataTypes.STRING(20), allowNull: false, unique:{msg: "Category exists"}}
     });
     
     category.associate = (models) => {

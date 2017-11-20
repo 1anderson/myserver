@@ -3,12 +3,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const validator = require('express-validator');
+const models  = require('./models');
 var jwt = require('jsonwebtoken');
 
 import userRouter from './routes/user';
 import categoryRouter from './routes/category';
-const models  = require('./models');
+import subCategoryRouter from './routes/subcategory';
 import * as information from './services/information';
+
+
 information.loadAccountStatus(models);
 
 app.use(function(req, res, next) {
@@ -23,6 +26,7 @@ app.use(fileUpload());
 app.use(validator());
 app.use('/user', userRouter(models));
 app.use('/category', categoryRouter(models));
+app.use('/subcategory', subCategoryRouter(models));
 export { app };
 
 
