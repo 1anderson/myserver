@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     password:{ type: DataTypes.STRING(200), allowNull: false},
     role: { type: DataTypes.STRING(50), allowNull: false},
     date_of_creation: { type: DataTypes.DATEONLY, allowNull: false },
-    email: { type: DataTypes.STRING(254), allowNull: false, unique: true },
+    email: { type: DataTypes.STRING(254), allowNull: false, unique: {msg: "email already registered"} },
     active_account: {type: DataTypes.BOOLEAN, allowNull: false},
     password_reminder_token: { type: DataTypes.STRING(100), allowNull: true},
     password_reminder_expire: { type: DataTypes.DATE, allowNull: true}

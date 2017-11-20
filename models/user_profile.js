@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     user_profile_id: { type: DataTypes.INTEGER, primaryKey: true , autoIncrement: true },
     name: { type: DataTypes.STRING(20), allowNull: false},
     last_name: { type: DataTypes.STRING(20), allowNull: false},
-    email: { type: DataTypes.STRING(254), allowNull: false, unique: true }
+    email: { type: DataTypes.STRING(254), allowNull: false, unique: {msg: "email already registered"} }
   });
 
   return UserProfile;

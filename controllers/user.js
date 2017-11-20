@@ -3,6 +3,8 @@ var jwt = require('jsonwebtoken');
 import * as passwordService from '../services/password';
 import * as emailService from '../services/email'; 
 import {accountStatus} from '../services/information';
+import {mountingSequelizeErrors} from '../services/error-monitoring';
+
 
 function createUser(models){
     return (req, res, next) =>{
@@ -10,6 +12,8 @@ function createUser(models){
             createAccount(models, req.body, user.user_profile_id))
          .then((userAccount)=>{
             res.status(201).json({msg: `user created successfully`})
+         }).catch((err)=>{
+            res.status(400).json({msg: mountingSequelizeErrors(err.errors)});
          });
     };
 };
