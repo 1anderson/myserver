@@ -11,7 +11,7 @@ function sendErros(){
 
 };
 
-function mountingSequelizeErrors(err){
+function formatingSequelizeErrors(err){
 
     switch(err.name){
     case 'SequelizeUniqueConstraintError':
@@ -38,6 +38,6 @@ function SequelizeForeignKeyConstraintError(name){
 
 export {
     saveErros,
-    mountingSequelizeErrors
+    formatingSequelizeErrors
 }
 

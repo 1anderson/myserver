@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node ./bin/www.js --presets es2015,stage-2"
+    "start": "babel-node ./bin/www.js --presets es2015,stage-2",
+    "init-database": "node ./bin/init-database.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,7 +24,8 @@
     "mysql2": "^1.4.2",
     "nodemailer": "^4.4.0",
     "sequelize": "^4.17.2",
-    "sequelize-cli": "^3.0.0"
+    "sequelize-cli": "^3.0.0",
+    "sequelize-fixtures": "^0.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0"

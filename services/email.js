@@ -9,10 +9,10 @@ function sendAuthorizationEmail(email_confirmation_token,email){
         
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
-                service: 'hotmail',
+                service: 'gmail',
                 auth: {
-                    user: 'allangremista@hotmail.com', // generated ethereal user
-                    pass: 'anderson1989'  // generated ethereal password
+                    user: 'hr7123597@gmail.com', // generated ethereal user
+                    pass: 'anderson123456789'  // generated ethereal password
                 }
             });
         

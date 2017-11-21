@@ -1,0 +1,40 @@
+    [
+        {
+            "model": "User_account_status",
+            "data": {
+                "user_account_status_id": null,
+                "code": 200,
+                "name": "ACTIVE"
+            }
+        },
+        {
+            "model": "User_account_status",
+            "data": {
+                "user_account_status_id": "baz",
+                "code": 401,
+                "name": "PENDING"
+            }
+        },
+        {
+            "model": "User_profile",
+            "data":{
+                "user_profile_id": 1,
+                "name": "Anderson",
+                "last_name": "Sobral",
+                "email": "allangremista@hotmail.com"
+            }
+        },
+        {
+            "model": "User_account",
+            "data": {
+                "user_account_id": 1,
+                "password": "$2a$10$3xtxwVRO2WRzNFxfljob1OfMwZ1GV6mdqEmA9A96S2PWT/8u4p8ES",
+                "role": "USER",
+                "date_of_creation": "2017-10-21",
+                "email": "allangremista@hotmail.com",
+                "active_account": true,
+                "password_reminder_token": null,
+                "password_reminder_expire": null
+            } 
+        }
+    ]

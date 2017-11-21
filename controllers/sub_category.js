@@ -1,5 +1,5 @@
 "use strict";
-import { mountingSequelizeErrors } from '../services/error-monitoring';
+import { formatingSequelizeErrors } from '../services/error-monitoring';
 function create(models){
     return (req, res, next)=>{
         models.Sub_category.create({
@@ -9,7 +9,7 @@ function create(models){
             res.status(201).json({msg: 'Sub category create successfully'})
         }).catch((err)=>{
             console.log(err);
-            res.status(400).json({msg: mountingSequelizeErrors(err)});
+            res.status(400).json({msg: formatingSequelizeErrors(err)});
         });
     }
 }

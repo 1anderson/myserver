@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 import * as passwordService from '../services/password';
 import * as emailService from '../services/email'; 
 import {accountStatus} from '../services/information';
-import {mountingSequelizeErrors} from '../services/error-monitoring';
+import {formatingSequelizeErrors} from '../services/error-monitoring';
 
 
 function createUser(models){
@@ -13,7 +13,7 @@ function createUser(models){
          .then((userAccount)=>{
             res.status(201).json({msg: `user created successfully`})
          }).catch((err)=>{
-            res.status(400).json({msg: mountingSequelizeErrors(err)});
+            res.status(400).json({msg: formatingSequelizeErrors(err)});
          });
     };
 };

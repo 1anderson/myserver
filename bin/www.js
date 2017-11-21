@@ -1,27 +1,27 @@
 #!/usr/bin/env node
 
 import { app } from '../app';
-var debug = require('debug')('express-test:server');
 import * as http from 'http';
-var models = require('../models');
-var port = normalizePort(process.env.PORT || '3000');
+const debug = require('debug')('express-test:server');
+
+const models = require('../models');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
-models.sequelize.sync().then(function() {
+//models.sequelize.sync().then(function() {
   /**
    * Listen on provided port, on all network interfaces.
    */
-  server.listen(port, function() {
-    debug('Express server listening on port ' + server.address().port);
-  });
-  server.on('error', onError);
-  server.on('listening', onListening);
 
-});
-
-
+ server.listen(port, function() {
+      debug('Express server listening on port ' + server.address().port);
+    });
+    server.on('error', onError);
+    server.on('listening', onListening);
+  //});
+ 
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
