@@ -9,8 +9,9 @@ function createCategory(models){
         }).then((category)=>{
             res.status(201).json({msg: 'Category create successfully'});
         }).catch((err)=>{
-            res.status(400).json({msg: mountingSequelizeErrors(err.errors)});
-            console.log(err.errors);
+            console.log(err);
+            res.status(400).json({msg: mountingSequelizeErrors(err)});
+            console.log(err);
         });
     };
 };

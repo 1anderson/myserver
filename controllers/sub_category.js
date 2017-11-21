@@ -9,7 +9,7 @@ function create(models){
             res.status(201).json({msg: 'Sub category create successfully'})
         }).catch((err)=>{
             console.log(err);
-            //res.status(400).json({msg: mountingSequelizeErrors(err.errors)});
+            res.status(400).json({msg: mountingSequelizeErrors(err)});
         });
     }
 }

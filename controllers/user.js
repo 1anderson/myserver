@@ -13,7 +13,7 @@ function createUser(models){
          .then((userAccount)=>{
             res.status(201).json({msg: `user created successfully`})
          }).catch((err)=>{
-            res.status(400).json({msg: mountingSequelizeErrors(err.errors)});
+            res.status(400).json({msg: mountingSequelizeErrors(err)});
          });
     };
 };
