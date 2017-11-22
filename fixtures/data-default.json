@@ -36,5 +36,20 @@
                 "password_reminder_token": null,
                 "password_reminder_expire": null
             } 
+        },
+        {   "model": "Category",
+            "data": {
+                "category_id" : 1,
+                "category_name": "Desenvolvimento"
+            }
+
+        },
+        {
+            "model": "Sub_category",
+            "data": {
+                "sub_category_id": 1,
+                "sub_category_name": "android",
+                "category_fk": 1
+            }
         }
     ]

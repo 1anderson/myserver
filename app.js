@@ -9,6 +9,7 @@ var jwt = require('jsonwebtoken');
 import userRouter from './routes/user';
 import categoryRouter from './routes/category';
 import subCategoryRouter from './routes/subcategory';
+import postRouter from './routes/post';
 import * as information from './services/information';
 
 
@@ -27,6 +28,7 @@ app.use(validator());
 app.use('/user', userRouter(models));
 app.use('/category', categoryRouter(models));
 app.use('/subcategory', subCategoryRouter(models));
+app.use('/post', postRouter(models));
 export { app };
 
 
