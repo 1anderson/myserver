@@ -2,7 +2,7 @@
         {
             "model": "User_account_status",
             "data": {
-                "user_account_status_id": null,
+                "user_account_status_id": 1,
                 "code": 200,
                 "name": "ACTIVE"
             }
@@ -10,7 +10,7 @@
         {
             "model": "User_account_status",
             "data": {
-                "user_account_status_id": "baz",
+                "user_account_status_id": 2,
                 "code": 401,
                 "name": "PENDING"
             }
