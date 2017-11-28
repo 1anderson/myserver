@@ -15,14 +15,18 @@ function create(models){
             category_fk: req.body.category_id,
             sub_category_fk: req.body.sub_category_id
         }).then((post)=>{
-            fileService.movefiles(post.post_id, req.files.files)
-                .then((pathOfImagens)=>{
-                    post.update({
-                        path_of_images: pathOfImagens
-                    }).then(() => {
-                        res.status(201).json({msg: `post created successfully`})
-                    })
-            });
+            if(req.files.files){
+                fileService.movefiles(post.post_id, req.files.files)
+                    .then((pathOfImagens)=>{
+                        post.update({
+                            path_of_images: pathOfImagens
+                        }).then(() => {
+                            res.status(201).json({msg: `post created successfully`})
+                        })
+                });
+            }else{
+                res.status(201).json({msg: `post created successfully`})
+            }
         }).catch((err)=>{
             res.status(400).json({msg: formatingSequelizeErrors(err)});
         });
