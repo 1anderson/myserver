@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes){
     var comment = sequelize.define('Comment',{
         comment_id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
-        text: {type: DataTypes.STRING(45), allowNull: false},
+        text: {type: DataTypes.STRING(255), allowNull: false},
         date_of_comment: {type:DataTypes.DATEONLY, allowNull: false}
     }); 
 

@@ -10,7 +10,7 @@ function create(req, res, next){
         console.log(req.files);
         req.check('files.files').custom((value)=>{
             if(!req.files.hasOwnProperty('files')){
-                throw new Error('Input name should be file');
+                throw new Error('Input name should be files');
             } 
         });
     }

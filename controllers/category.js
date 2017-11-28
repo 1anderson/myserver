@@ -3,7 +3,7 @@
 import { formatingSequelizeErrors } from '../services/error-monitoring';
 
 function createCategory(models){
-    return (req, res, next)=>{
+    return (req, res, next) => {
         models.Category.create({
             category_name: req.body.category_name
         }).then((category)=>{
