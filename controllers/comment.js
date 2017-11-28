@@ -12,7 +12,7 @@ function create(models){
                 res.status(201).json({msg: 'Comment create successfully'});
         }).catch((err)=>{
             res.status(400).json({msg: formatingSequelizeErrors(err)});
-        })     
+        });     
     };
 }
 

@@ -2,11 +2,11 @@
 
 import * as fileService from '../services/file';
 import { formatingSequelizeErrors } from '../services/error-monitoring';
+import * as formattingService from '../services/formatting-sequelize-output';
 
 function create(models){
-    return (req, res, next ) => {
-       
-        models.Post.create({
+    return ( req, res, next ) => {
+       models.Post.create({
             title: req.body.title,
             description: req.body.description,
             body: req.body.body,
@@ -25,16 +25,29 @@ function create(models){
                         })
                 });
             }else{
-                res.status(201).json({msg: `post created successfully`})
+                res.status(201).json({msg: `post created successfully`});
             }
         }).catch((err)=>{
-            res.status(400).json({msg: formatingSequelizeErrors(err)});
+            console.log(err);
+           res.status(400).json({msg: formatingSequelizeErrors(err)});
         });
     };
 };
 
 
+function getAll(models){
+    return (req, res, next) => {
+        models.Post.findAll().then((posts)=>{
+            res.status(200).json({posts: formattingService.formattingOutput(posts)});
+            
+        }).catch((err) => {
+            res.status(400).json({msg: formatingSequelizeErrors(err)});
+        })
+    }
+}
+
 
 export {
-    create
+    create,
+    getAll
 };
