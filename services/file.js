@@ -12,7 +12,7 @@ function movefiles(postId, files){
                 if(files.constructor!==Array) files = [files];
                 console.log(files);
                 for (let i=0;i<files.length;i++){
-                    files[i].mv(`${path}/${postId}/${files[i].name}`,(res)=>{
+                    files[i].mv(`${path}/${postId}/${files[i].name}.html`,(res)=>{
                         if(res){
                             reject(res);
                         }

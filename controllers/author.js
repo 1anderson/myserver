@@ -2,13 +2,13 @@
 "use strict";
 import { formatingSequelizeErrors } from '../services/error-monitoring';
 import * as formattingService from '../services/formatting-sequelize-output'
-
-function createCategory(models) {
+function createAuthor(models) {
     return (req, res, next) => {
-        models.Category.create({
-            category_name: req.body.category_name
-        }).then((category)=>{
-            res.status(201).json({msg: 'Category create successfully'});
+        models.Author.create({
+            name: req.body.author_name,
+            date_of_creation : new Date()
+        }).then((author)=>{
+            res.status(201).json({msg: 'Author create successfully'});
         }).catch((err)=>{
             console.log(err);
             res.status(400).json({msg: formatingSequelizeErrors(err)});
@@ -17,10 +17,11 @@ function createCategory(models) {
     };
 };
 
-function getAll(models){
+function getAll(models) {
     return (req, res, next) => {
-        models.Category.findAll().then((categories)=>{
-            res.status(200).json({categories: formattingService.formattingOutput(categories)});
+        models.Author.findAll().then((authors)=> {
+            formattingService.formattingOutput(authors)
+            res.status(200).json({authors: formattingService.formattingOutput(authors)});
             
         }).catch((err) => {
             res.status(400).json({msg: formatingSequelizeErrors(err)});
@@ -29,6 +30,6 @@ function getAll(models){
 }
 
 export {
-    createCategory,
+    createAuthor,
     getAll
 }

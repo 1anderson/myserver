@@ -7,6 +7,7 @@ const models  = require('./models');
 var jwt = require('jsonwebtoken');
 
 import userRouter from './routes/user';
+import authorRouter from './routes/author';
 import categoryRouter from './routes/category';
 import subCategoryRouter from './routes/subcategory';
 import postRouter from './routes/post';
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(fileUpload());
 app.use(validator());
 app.use('/user', userRouter(models));
+app.use('/author', authorRouter(models));
 app.use('/category', categoryRouter(models));
 app.use('/subcategory', subCategoryRouter(models));
 app.use('/post', postRouter(models));
