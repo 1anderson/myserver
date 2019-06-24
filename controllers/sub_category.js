@@ -6,7 +6,7 @@ function create(models){
     return (req, res, next)=> {
         models.Sub_category.create({
             category_fk: req.body.category_id,
-            sub_category_name: req.body.sub_category_name
+            name: req.body.sub_category_name
         }).then((sub_category)=>{
             res.status(201).json({msg: 'Sub category create successfully'})
         }).catch((err)=>{

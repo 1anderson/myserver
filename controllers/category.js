@@ -6,7 +6,7 @@ import * as formattingService from '../services/formatting-sequelize-output'
 function createCategory(models) {
     return (req, res, next) => {
         models.Category.create({
-            category_name: req.body.category_name
+            name: req.body.category_name
         }).then((category)=>{
             res.status(201).json({msg: 'Category create successfully'});
         }).catch((err)=>{

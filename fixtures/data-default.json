@@ -67,7 +67,7 @@
         {   "model": "Category",
             "data": {
                 "id" : 1,
-                "category_name": "Desenvolvimento"
+                "name": "Desenvolvimento"
             }
 
         },
@@ -75,7 +75,7 @@
             "model": "Sub_category",
             "data": {
                 "id": 1,
-                "sub_category_name": "android",
+                "name": "android",
                 "category_fk": 1
             }
         }
