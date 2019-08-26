@@ -10,9 +10,7 @@ function createAuthor(models) {
         }).then((author)=>{
             res.status(201).json({msg: 'Author create successfully'});
         }).catch((err)=>{
-            console.log(err);
             res.status(400).json({msg: formatingSequelizeErrors(err)});
-            console.log(err);
         });
     };
 };
@@ -21,7 +19,7 @@ function getAll(models) {
     return (req, res, next) => {
         models.Author.findAll().then((authors)=> {
             formattingService.formattingOutput(authors)
-            res.status(200).json({authors: formattingService.formattingOutput(authors)});
+            res.status(200).json(formattingService.formattingOutput(authors));
             
         }).catch((err) => {
             res.status(400).json({msg: formatingSequelizeErrors(err)});

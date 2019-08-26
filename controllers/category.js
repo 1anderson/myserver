@@ -20,7 +20,7 @@ function createCategory(models) {
 function getAll(models){
     return (req, res, next) => {
         models.Category.findAll().then((categories)=>{
-            res.status(200).json({categories: formattingService.formattingOutput(categories)});
+            res.status(200).json(formattingService.formattingOutput(categories));
             
         }).catch((err) => {
             res.status(400).json({msg: formatingSequelizeErrors(err)});

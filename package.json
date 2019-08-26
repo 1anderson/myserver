@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node ./bin/www.js --presets es2015,stage-2",
+    "start": "babel-node ./bin/www.js --presets es2015,stage-2 --plugins dynamic-import-node",
     "init-database": "node ./bin/init-database.js"
   },
   "author": "",
@@ -20,15 +20,18 @@
     "express-fileupload": "^0.1.4",
     "express-validator": "^4.3.0",
     "fs-extra": "^4.0.2",
+    "fs-readfile-promise": "^3.0.1",
     "jsonwebtoken": "^8.1.0",
     "mysql": "^2.13.0",
     "mysql2": "^1.4.2",
     "nodemailer": "^4.4.0",
     "sequelize": "^4.17.2",
     "sequelize-cli": "^3.0.0",
-    "sequelize-fixtures": "^0.6.0"
+    "sequelize-fixtures": "^0.6.0",
+    "sequelize-to-json": "^0.10.3"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "babel-plugin-dynamic-import-node": "^2.3.0"
   }
 }
