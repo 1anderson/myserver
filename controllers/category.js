@@ -6,7 +6,7 @@ import * as formattingService from '../services/formatting-sequelize-output'
 function createCategory(models) {
     return (req, res, next) => {
         models.Category.create({
-            category_name: req.body.category_name
+            name: req.body.category_name
         }).then((category)=>{
             res.status(201).json({msg: 'Category create successfully'});
         }).catch((err)=>{
@@ -20,7 +20,7 @@ function createCategory(models) {
 function getAll(models){
     return (req, res, next) => {
         models.Category.findAll().then((categories)=>{
-            res.status(200).json({categories: formattingService.formattingOutput(categories)});
+            res.status(200).json(formattingService.formattingOutput(categories));
             
         }).catch((err) => {
             res.status(400).json({msg: formatingSequelizeErrors(err)});

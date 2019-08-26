@@ -64,19 +64,111 @@
                 "user_profile_fk": 2
             }
         },
+        {   "model": "Theme",
+            "data": {
+                "id" : 1,
+                "name": "Desenvolvimento"
+            }
+
+        },
+        {   "model": "Theme",
+            "data": {
+                "id" : 2,
+                "name": "Games"
+            }
+
+        },
+        {   "model": "Theme",
+            "data": {
+                "id" : 3,
+                "name": "Psicologia"
+            }
+
+        },
         {   "model": "Category",
             "data": {
                 "id" : 1,
-                "category_name": "Desenvolvimento"
+                "name": "Front End",
+                "theme_fk": 1
             }
 
+        },
+        {   "model": "Category",
+            "data": {
+                "id" : 2,
+                "name": "Desenvolvimento de jogos",
+                "theme_fk": 2
+
+            }
+
+        },
+        {   "model": "Category",
+            "data": {
+                "id" : 3,
+                "name": "Terapia Cognitiva Comportamental",
+                "theme_fk": 3
+
+            }
         },
         {
             "model": "Sub_category",
             "data": {
                 "id": 1,
-                "sub_category_name": "android",
+                "name": "Angular",
                 "category_fk": 1
+            }
+        },
+        {
+            "model": "Sub_category",
+            "data": {
+                "id": 2,
+                "name": "Unity",
+                "category_fk": 2
+            }
+        },
+        {
+            "model": "Sub_category",
+            "data": {
+                "id": 3,
+                "name": "Terapia dos Esquemas",
+                "category_fk": 3
+            }
+        },
+        {
+            "model": "Post",
+            "data":{
+                "id": 1,
+                "title": "Suicídio e funções executivas.",
+                "description": "Uma revisão sistemática de literatura observando a relação entre funções executivas e comportamento suicida.",
+                "created_date": "2017-10-21",
+                "author_fk": 2,
+                "category_fk": 1,
+                "sub_category_fk":1
+            }
+        },
+        {
+            "model": "Post",
+            "data": {
+                "id": 2,
+                "title": "Estratégias para monitorar Vocabulário de Projetos de Software.",
+                "description": "Aborda a extração do vocabulário de software usando um ferramental criado através de estudos para usar como base para estudos de como o vocabulário pode ser usado para evoluir o processo de desenvolvimento de software.",
+                "created_date": "2017-10-21",
+                "author_fk": 1,
+                "category_fk": 1,
+                "sub_category_fk": 1
+            }
+        },
+        {
+            "model": "Post",
+            "data": {
+                "id": 3,
+                "title": "O ENSINO DE LINGUAGEM DE PROGRAMAÇÃO BASEADO EM PEDAGOGIA POR PROJETOS E EAD COLABORATIVA:ESTUDO DE CASOS EM ESTATÍSTICA",
+                "description": "Este trabalho aplica as tecnologias de Educação a Distância (EAD) ao processo de ensino-aprendizagem de Linguagem de Programação apoiado pela Pedagogia por Projetos. Utiliza-se de EAD colaborativa, rompendo com o modelo de EAD tradicional (1 professor – N alunos) e implementando a aprendizagem participativa (N professores/formadores – N alunos, organizados em grupos)",
+                "created_date": "2017-10-21",
+                "author_fk": 1,
+                "category_fk": 1,
+                "sub_category_fk": 1
             }
         }
     ]
+

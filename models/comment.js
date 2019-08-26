@@ -4,8 +4,8 @@ module.exports = function(sequelize, DataTypes){
     var comment = sequelize.define('Comment',{
         id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
         text: {type: DataTypes.STRING(255), allowNull: false},
-        date_of_comment: {type:DataTypes.DATEONLY, allowNull: false},
-        post_id: { type: DataTypes.INTEGER, allowNull:false },
+        date: {type:DataTypes.DATEONLY, allowNull: false},
+        post_fk: { type: DataTypes.INTEGER, allowNull:false },
     }); 
 
     comment.associate = function(models){

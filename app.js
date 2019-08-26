@@ -14,12 +14,12 @@ import postRouter from './routes/post';
 import commentRouter from './routes/comment';
 import * as information from './services/information';
 
-
 information.loadAccountStatus(models);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', '*');
   next();
 });
 
