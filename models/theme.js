@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     theme.associate = (models) => {
-        theme.hasMany(models.Category, {foreignKey: 'theme_fk', sourceKey: 'id'});
+        theme.hasMany(models.Category, {foreignKey: 'theme_fk', sourceKey: 'id', as: 'categories'});
     }
     return theme;
 }

@@ -12,6 +12,7 @@ import categoryRouter from './routes/category';
 import subCategoryRouter from './routes/subcategory';
 import postRouter from './routes/post';
 import commentRouter from './routes/comment';
+import themeRouter from './routes/theme';
 import * as information from './services/information';
 
 information.loadAccountStatus(models);
@@ -33,6 +34,7 @@ app.use('/category', categoryRouter(models));
 app.use('/subcategory', subCategoryRouter(models));
 app.use('/post', postRouter(models));
 app.use('/comment', commentRouter(models));
+app.use('/theme', themeRouter(models));
 export { app };
 
 

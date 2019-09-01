@@ -35,7 +35,7 @@ function createUserProfile(models, userProfileData){
 function createAccount(models, userAccountData, profileId){
         return new Promise((resolve, reject)=>{
             passwordService.generatedHash(userAccountData.password,10)
-                .then((passwordHash)=>{
+                .then((passwordHash) => {
                   models.User_account.create({
                         user_account_id: profileId,
                         password: passwordHash,
@@ -46,7 +46,7 @@ function createAccount(models, userAccountData, profileId){
                         password_reminder_token: null,
                         password_reminder_expire: null,
                         user_account_status_fk: accountStatus.PENDING
-                   }).then((userAccount)=>{
+                   }).then((userAccount)=> {
                     jwt.sign({
                         data: userAccount.user_account_id
                       }, 'secret123', { expiresIn: '1h' },(err, token)=>{
