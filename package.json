@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
-    "express-fileupload": "^0.1.4",
+    "express-fileupload": "^1.1.9",
     "mysql": "^2.13.0"
   }
 }
